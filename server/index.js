@@ -9,7 +9,16 @@ import dalleRoutes from './routes/dalleRoutes.js';
 dotenv.config();
 
 const app = express();
-app.use(cors());
+
+// *** THIS IS THE FINAL CORS CONFIGURATION ***
+const vercelFrontendURL = 'https://ai-image-generator-delta-one.vercel.app';
+
+app.use(cors({
+  origin: vercelFrontendURL,
+  credentials: true
+}));
+// *** END OF CORS CONFIGURATION ***
+
 app.use(express.json({ limit: '50mb' }));
 
 app.use('/api/v1/post', postRoutes);
